@@ -1,65 +1,63 @@
-import Node from './Node';
-
 class MathOperator {
+    #nodesValues;
     constructor() {
-        this.nodesValues = [];
+        this.#nodesValues = [];
     }
 
-    subtreeSearch(node) {
+    #subtreeSearch(node) {
         if(node.hasLeftChild()) {
-            this.subtreeSearch(node.leftChild);
+            this.#subtreeSearch(node.leftChild);
         }
-        this.nodesValues.push(node.value);
+        this.#nodesValues.push(node.value);
         if(node.hasRightChild()) {
-            this.subtreeSearch(node.rightChild);
+            this.#subtreeSearch(node.rightChild);
         }
     }
 
-    clearArray() {
-        this.nodesValues = [];
+    #clearArray() {
+        this.#nodesValues = [];
     }
 
-    getNumberOfElements() {
-        return this.nodesValues.length;
+    #getNumberOfElements() {
+        return this.#nodesValues.length;
     }
 
-    getSumOfElements() {
-        return this.nodesValues.reduce((sum, val) => sum += val);
+    #getSumOfElements() {
+        return this.#nodesValues.reduce((sum, val) => sum += val);
     }
 
-    countAverage(sum, amount) {
+    #countAverage(sum, amount) {
         return sum/amount;
     }
 
     subtreeSum(node) {
-        this.subtreeSearch(node);
-        let sum = this.getSumOfElements();
-        this.clearArray();
+        this.#subtreeSearch(node);
+        let sum = this.#getSumOfElements();
+        this.#clearArray();
         return sum;
     }
 
     subtreeAverage(node) {
-        this.subtreeSearch(node);
-        let sum = this.getSumOfElements();
-        let amount = this.getNumberOfElements();
-        this.clearArray();
-        return this.countAverage(sum, amount);
+        this.#subtreeSearch(node);
+        let sum = this.#getSumOfElements();
+        let amount = this.#getNumberOfElements();
+        this.#clearArray();
+        return this.#countAverage(sum, amount);
     }
 
     subtreeMedian(node) {
-        this.subtreeSearch(node);
-        const sorted = this.nodesValues.sort();
-        this.printArray(sorted)
-        let amount = this.getNumberOfElements();
+        this.#subtreeSearch(node);
+        this.#nodesValues = this.#nodesValues.sort();
+        let amount = this.#getNumberOfElements();
         let half = Math.floor(amount / 2);
         let median = (!amount % 2) ? (
-            this.countAverage(sorted[half - 1] + sorted[half], 2)
+            this.#countAverage(this.#nodesValues[half - 1] + this.#nodesValues[half], 2)
         ) : (
-            sorted[half]
+            this.#nodesValues[half]
         );
-        this.clearArray();
+        this.#clearArray();
         return median;
     }
 }
 
-export default MathOperator;
+module.exports = MathOperator;
