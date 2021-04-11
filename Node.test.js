@@ -22,11 +22,11 @@ test('Creating one node with two child and checking their values', () => {
     const rightChildNode = new Node(5);
     parentNode.addLeftChild(leftChildNode);
     parentNode.addRightChild(rightChildNode);
-    expect(parentNode.value).toBe(2);
+    expect(parentNode.value()).toBe(2);
     expect(parentNode.hasLeftChild()).toBe(true);
-    expect(parentNode.leftChild.value).toBe(1);
+    expect(parentNode.leftChild().value()).toBe(1);
     expect(parentNode.hasRightChild()).toBe(true);
-    expect(parentNode.rightChild.value).toBe(5);
+    expect(parentNode.rightChild().value()).toBe(5);
 });
 
 test('Creating left child chain', () => {
@@ -41,8 +41,8 @@ test('Creating left child chain', () => {
     expect(leftChildNode.hasRightChild()).toBe(false);
     expect(leftGrandchildNode.hasLeftChild()).toBe(false);
     expect(leftGrandchildNode.hasRightChild()).toBe(false);
-    expect(parentNode.leftChild.value).toBe(3);
-    expect(leftChildNode.leftChild.value).toBe(2);
+    expect(parentNode.leftChild().value()).toBe(3);
+    expect(leftChildNode.leftChild().value()).toBe(2);
 });
 
 test('Trying to add left child to node that already has a child', () => {
@@ -64,7 +64,7 @@ test('Deleting left child node when possible', () => {
     const leftChildNode = new Node(3);
     parentNode.addLeftChild(leftChildNode);
     expect(parentNode.hasLeftChild()).toBe(true);
-    expect(parentNode.leftChild.value).toBe(3);
+    expect(parentNode.leftChild().value()).toBe(3);
     parentNode.deleteLeftChild();
     expect(parentNode.hasLeftChild()).toBe(false);
 });
@@ -87,7 +87,7 @@ test('Deleting right child node when possible', () => {
     const rightChildNode = new Node(3);
     parentNode.addRightChild(rightChildNode);
     expect(parentNode.hasRightChild()).toBe(true);
-    expect(parentNode.rightChild.value).toBe(3);
+    expect(parentNode.rightChild().value()).toBe(3);
     parentNode.deleteRightChild();
     expect(parentNode.hasRightChild()).toBe(false);
 });

@@ -2,17 +2,18 @@ const Node = require('./Node.js');
 
 class MathOperator {
     #nodesValues;
+
     constructor() {
         this.#nodesValues = [];
     }
 
     #subtreeSearch(node) {
         if(node.hasLeftChild()) {
-            this.#subtreeSearch(node.leftChild);
+            this.#subtreeSearch(node.leftChild());
         }
-        this.#nodesValues.push(node.value);
+        this.#nodesValues.push(node.value());
         if(node.hasRightChild()) {
-            this.#subtreeSearch(node.rightChild);
+            this.#subtreeSearch(node.rightChild());
         }
     }
 
