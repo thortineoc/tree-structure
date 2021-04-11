@@ -19,7 +19,7 @@ class Node {
         if(!this.hasLeftChild()) {
             this.leftChild  = node;
         } else {
-            console.log("This node has already a left child");
+            throw "This node has already a left child";
         }
     }
 
@@ -27,32 +27,29 @@ class Node {
         if(!this.hasRightChild()) {
             this.rightChild  = node;
         } else {
-            console.log("This node has already a right child");
+            throw "This node has already a right child";
         }
     }
 
     deleteLeftChild() {
         if(!this.hasLeftChild()) {
-            console.log("This node do not have left child to delete");
+            throw "This node do not have left child to delete";
         } else if(this.leftChild.hasLeftChild() || this.leftChild.hasRightChild()) {
-            console.log("Cannot remove node with children")
+            throw "Delete left child - cannot remove node with children";
         } else {
-            console.log("Deleting left child");
             this.leftChild = null;
         }
     }
 
     deleteRightChild() {
         if(!this.hasRightChild()) {
-            console.log("This node do not have right child to delete");
-        } else if(this.Child.hasLeftChild() || this.leftChild.hasRightChild()) {
-            console.log("Cannot remove node with children")
+            throw "This node do not have right child to delete";
+        } else if(this.rightChild.hasLeftChild() || this.rightChild.hasRightChild()) {
+            throw "Delete right child - cannot remove node with children";
         } else {
-            console.log("Deleting right child");
             this.rightChild = null;
         }
     }
 }
 
 module.exports = Node;
-
