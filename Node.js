@@ -1,8 +1,8 @@
 class Node {
     constructor(value, leftChild = null, rightChild = null) {
-        this.value = value; // number
-        this.leftChild = leftChild; // ref to object
-        this.rightChild = rightChild; // ref to object
+        this.value = value;
+        this.leftChild = leftChild;
+        this.rightChild = rightChild;
     }
 
     hasLeftChild() {
@@ -17,7 +17,7 @@ class Node {
 
     addLeftChild(node) {
         if(!this.hasLeftChild()) {
-            this.leftChild  = node;
+            this.leftChild = node;
         } else {
             throw "This node has already a left child";
         }

@@ -1,3 +1,5 @@
+const Node = require('./Node.js');
+
 class MathOperator {
     #nodesValues;
     constructor() {
@@ -50,7 +52,7 @@ class MathOperator {
         this.#nodesValues = this.#nodesValues.sort();
         let amount = this.#getNumberOfElements();
         let half = Math.floor(amount / 2);
-        let median = (!amount % 2) ? (
+        let median = (!(amount % 2)) ? (
             this.#countAverage(this.#nodesValues[half - 1] + this.#nodesValues[half], 2)
         ) : (
             this.#nodesValues[half]
