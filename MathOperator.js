@@ -49,7 +49,7 @@ class MathOperator {
 
     subtreeMedian(node) {
         this.#subtreeSearch(node);
-        this.#nodesValues = this.#nodesValues.sort();
+        this.#nodesValues = this.#nodesValues.sort((x, y) => x - y);
         let amount = this.#getNumberOfElements();
         let half = Math.floor(amount / 2);
         let median = (!(amount % 2)) ? (

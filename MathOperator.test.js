@@ -1,4 +1,3 @@
-const { test, expect } = require('@jest/globals');
 const MathOperator = require('./MathOperator.js');
 const Node = require('./Node.js');
 
@@ -49,6 +48,31 @@ test('Count sum of elements nested children from subtree', () => {
     expect(result).toBe(25);
 });
 
+test('Count sum, add element and count sum again', () => {
+    const operator = new MathOperator();
+    const node1 = new Node(5);
+    const node2 = new Node(1);
+    const node3 = new Node(2, node1, node2);
+    let result = operator.subtreeSum(node3);
+    expect(result).toBe(8);
+    const node4 = new Node(10);
+    node1.addLeftChild(node4);
+    result = operator.subtreeSum(node3);
+    expect(result).toBe(18);
+});
+
+test('Count sum, delete element and count sum again', () => {
+    const operator = new MathOperator();
+    const node1 = new Node(5);
+    const node2 = new Node(1);
+    const node3 = new Node(2, node1, node2);
+    let result = operator.subtreeSum(node3);
+    expect(result).toBe(8);
+    node3.deleteLeftChild();
+    result = operator.subtreeSum(node3);
+    expect(result).toBe(3);
+});
+
 test('Count average of elements from root', () => {
     const operator = new MathOperator();
     const node1 = new Node(10);
@@ -81,6 +105,31 @@ test('Count average of elements from subtree', () => {
     node6.addLeftChild(node7);
     const result = operator.subtreeAverage(node3);
     expect(result).toBe(5);
+});
+
+test('Count average, add element and count average again', () => {
+    const operator = new MathOperator();
+    const node1 = new Node(5);
+    const node2 = new Node(1);
+    const node3 = new Node(2, node1, node2);
+    let result = operator.subtreeAverage(node3);
+    expect(result).toBe(8/3);
+    const node4 = new Node(10);
+    node1.addRightChild(node4);
+    result = operator.subtreeAverage(node3);
+    expect(result).toBe(18/4);
+});
+
+test('Count average, delete element and count average again', () => {
+    const operator = new MathOperator();
+    const node1 = new Node(10);
+    const node2 = new Node(5);
+    const node3 = new Node(3, node1, node2);
+    let result = operator.subtreeAverage(node3);
+    expect(result).toBe(6);
+    node3.deleteLeftChild();
+    result = operator.subtreeAverage(node3);
+    expect(result).toBe(4);
 });
 
 test('Count median of elements from root', () => {
@@ -128,4 +177,23 @@ test('Count median of elements nested children from subtree - even amount', () =
     node6.addLeftChild(node7);
     const result = operator.subtreeMedian(node4);
     expect(result).toBe(4.5);
+});
+
+test('Count median, delete and add elements, count median again', () => {
+    const operator = new MathOperator();
+    const node1 = new Node(11);
+    const node2 = new Node(6);
+    const node3 = new Node(1, node2);
+    node2.addLeftChild(node1);
+    let result = operator.subtreeMedian(node3);
+    expect(result).toBe(6);
+    node2.deleteLeftChild();
+    result = operator.subtreeMedian(node3);
+    expect(result).toBe(3.5);
+    const node4 = new Node(17);
+    const node5 = new Node(3);
+    node2.addRightChild(node4);
+    node2.addLeftChild(node5);
+    result = operator.subtreeMedian(node2);
+    expect(result).toBe(6);
 });
